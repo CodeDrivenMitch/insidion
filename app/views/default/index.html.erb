@@ -1,0 +1,11 @@
+<% @blocks.each do |b| %>
+    <div class="box" data-type="<%= b.blockable_type.downcase %>" data-id="<%= b.blockable_id %>">
+      <div class="innerContent">
+        <span class="title"><%= b.title %></span>
+
+        <div class="preview">
+          <%= render b.blockable_type.downcase, item: b %>
+        </div>
+      </div>
+    </div>
+<% end %>

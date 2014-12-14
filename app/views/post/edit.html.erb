@@ -1,0 +1,19 @@
+<%= form_for @post, url: post_path(@post) do |f| %>
+    <div class="form-row">
+      <%= f.text_area :content %>
+      <%= f.text_area :excerpt %>
+    </div>
+
+    <%= f.fields_for :block, @block do |b| %>
+        <div class="form-row">
+          <%= b.text_field :title %>
+        </div>
+    <% end %>
+
+    <div class="form-row">
+      <%= f.submit 'Save' %>
+    </div>
+<% end %>
+
+
+<% parent_layout "admin" %>

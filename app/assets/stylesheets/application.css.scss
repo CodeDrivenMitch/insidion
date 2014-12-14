@@ -1,0 +1,138 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+  *= require jquery-ui
+ *= require_tree .
+ *= require_self
+ */
+@import 'bootstrap-sprockets';
+@import 'bootstrap';
+
+body {
+  background-image: image-url("background.jpg");
+}
+
+/* Custom container */
+.container-full {
+  margin: 0 auto;
+  width: 100%;
+}
+
+.navbar {
+  border-radius: 0;
+  margin-bottom: 0;
+}
+
+/* Custom navbar */
+.navbar-brand, .navbar-nav > li > a {
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.navbar-nav > .active > a {
+  opacity: .6;
+}
+
+.box {
+  width: 25%;
+  padding-bottom: 25%;
+  color: #FFF;
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  float: left;
+  cursor: pointer;
+
+  span.title {
+    font-weight: 700;
+  }
+}
+
+.box-wide {
+  width: 50%;
+}
+
+.innerContent {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  top: 10px;
+  bottom: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+}
+
+@media only screen and (min-width: 320px) {
+  .box {
+    width: 100%;
+    padding-bottom: 100%;
+  }
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (min-width: 480px) {
+  .box {
+    width: 50%;
+    padding-bottom: 50%;
+  }
+  .box-wide {
+    width: 100%;
+  }
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width: 992px) {
+  .box {
+    width: 25%;
+    padding-bottom: 25%;
+  }
+  .box-wide {
+    width: 50%;
+  }
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width: 1200px) {
+  .box {
+    width: 12.5%;
+    padding-bottom: 12.5%;
+  }
+
+  .box-wide {
+    width: 25%;
+  }
+}
+
+#lightbox {
+  width: 0;
+  height: 0;
+  display: block;
+  position: absolute;
+  background-color: black;
+  color: white;
+}
+
+.currentBox {
+  @extend .box;
+  width: 50%;
+  padding-bottom: 50%;
+}
+
+.admin-wrapper {
+  width: 900px;
+  background-color: rgba(255,255,255,0.7);
+  color: black;
+  padding: 10px;
+  margin: 0 auto;
+}

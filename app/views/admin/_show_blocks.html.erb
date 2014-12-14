@@ -1,0 +1,21 @@
+<h1>Current blocks</h1>
+
+<table class="table">
+  <tr>
+    <th>ID</th>
+    <th>Type</th>
+    <th>Titlte</th>
+    <th>Created at</th>
+    <th>Actions</th>
+  </tr>
+
+  <% blocks.each do |b| %>
+      <tr>
+        <td><%= b.id %></td>
+        <td><%= b.blockable_type %></td>
+        <td><%= b.title %></td>
+        <td><%= b.created_at %></td>
+        <td><%= link_to 'Edit', edit_block_path(b) %> <%= link_to 'Destroy', block_path(b), :confirm => 'Are you sure?', :method => :delete %></td>
+      </tr>
+  <% end %>
+</table>

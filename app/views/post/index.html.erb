@@ -1,0 +1,22 @@
+<h1>Overview of posts</h1>
+<table class="table">
+  <tr>
+    <th>ID</th>
+    <th>Title</th>
+    <th>Excerpt</th>
+    <th>Actions</th>
+  </tr>
+
+  <% @posts.each do |p| %>
+      <tr>
+        <td><%= p.id %></td>
+        <td><%= p.block.title %></td>
+        <td><%= p.excerpt %></td>
+        <td><%= link_to 'Edit', edit_post_path(p) %>
+          <%= link_to 'Destroy', post_path(p), :confirm => 'Are you sure?', :method => :delete %>
+        </td>
+      </tr>
+  <% end %>
+</table>
+
+<% parent_layout "admin" %>

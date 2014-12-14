@@ -1,0 +1,8 @@
+<%= f.fields_for param_name, block do |b| %>
+    <div class="form-group">
+      <label for="content" class="col-sm-1 control-label">Content:</label>
+      <div class="col-sm-8">
+        <%= b.text_area :content, :class => 'form-control', :id => 'content' %>
+      </div>
+    </div>
+<% end %>
