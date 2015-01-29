@@ -32,57 +32,40 @@ class BlockController < ApplicationController
   end
 
   def create
-    @block = Block.new(params[:block].permit(:title, :active))
+    @block = Block.new block_params
+    if @block.valid?
+      @block.save
 
-    case params[:block][:blockable_type]
-      when 'Post'
-        @blockable = Post.new(params[:block][:post].permit(:excerpt, :content))
-      when 'Project'
-        @blockable = Project.new(params[:block][:project].permit(:content))
-      else
-        @blockable = nil
+      redirect_to :admin_index
     end
-
-    @blockable.save
-    @block.blockable = @blockable
-    @block.save
-
-    redirect_to :admin_index
+    render :new
   end
 
   def update
-    @block.title = params[:block][:title]
-    @block.active = params[:block][:active] == 1
-
-    if @block.blockable_type == params[:block][:blockable_type] and @blockable != nil
-      @blockable = @block.blockable
-
-      @blockable.update_attributes params[:block][@block.blockable_type.downcase.to_sym].permit(:excerpt, :content)
-    else
-      case params[:block][:blockable_type]
-        when 'Post'
-          @blockable = Post.new(params[:block][:post].permit(:excerpt, :content))
-        when 'Project'
-          @blockable = Project.new(params[:block][:project].permit(:content))
-        else
-          @blockable = nil
-      end
-
-      @block.blockable.delete unless @block.blockable.nil?
-      @blockable.save
-      @block.blockable = @blockable
-      @block.save
-    end
-
+    @block.update_attributes!(block_params)
     redirect_to :admin_index
   end
 
   private
+
+  # BEFORE ACTION METHODS
   def get_block
     @block = Block.find(params[:id])
   end
 
   def check_login
     true
+  end
+
+  # HELPERS
+
+
+  # STRONG PARAMETER FUNCTIONS
+  def block_params
+    params.require(:block).permit(:title, :active, :blockable_type, block_images_attributes: [:image],
+    blockable_attributes: [
+        :content,
+        :excerpt
+    ])
   end
 end

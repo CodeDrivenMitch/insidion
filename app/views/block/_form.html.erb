@@ -1,63 +1,54 @@
-<h1>Editing block</h1>
-<%= form_for @block, url: {action: @action}, html: {role: 'form', :class => 'form-horizontal '} do |f| %>
-    <div class="form-group">
-      <label for="title" class="col-sm-1 control-label">Title:</label>
+<div class="row">
+  <div class="col-md-8 col-lg-offset-2">
+    <h1>Editing block</h1>
 
-      <div class="col-sm-8">
-        <%= f.text_field :title, :class => 'form-control', :id => 'title' %>
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="active" class="col-sm-1 control-label">Show?:</label>
+    <%= simple_form_for @block, url: {action: @action}, html: {role: 'form'} do |f| %>
+        <%= f.input :title %>
+        <%= f.input :active, as: :select %>
+        <%= f.input :content %>
 
-      <div class="col-sm-1">
-        <%= f.check_box :active, :class => 'form-control', :id => 'active' %>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label for="blocktype" class="col-sm-1 control-label">Type:</label>
-
-      <div class="col-sm-3">
         <% if @block.blockable %>
+            <div class="form-group text optional block_content">
+              <label class="text optional control-label" for="block_content">Type</label>
+              <p class="form-control-static"><%= @block.blockable_type %></p>
+            </div>
             <%= f.hidden_field :blockable_type %>
-            <p class="form-control-static"><%= @block.blockable_type %></p>
+
         <% else %>
-            <%= f.select :blockable_type, ['Post', 'Project'], :class => 'form-control', :id => 'blocktype' %>
+            <%= f.input :blockable_type, :collection => ['Post', 'Project'], :id => 'blocktype' %>
         <% end %>
-      </div>
-    </div>
 
-    <div class="form-group">
-      <% if @block.block_images.count > 0 %>
-          We have images!
-          <%= @block.block_images %>
-      <% else %>
+        <% if @block.block_images.count > 0 %>
+            <h3>Current Images</h3>
+            <% @block.block_images.each do |i| %>
+                <%= image_tag i.image.url(:medium) %>
+            <% end %>
+        <% end %>
 
-          <%= f.fields_for :block_images do |b| %>
-              <%= b.fields_for :upload do |u| %>
-                  <%= u.file_field :file %>
-              <% end %>
-          <% end %>
-      <% end %>
+        <h3>Upload Images</h3>
+        <%= f.nested_fields_for :block_images, BlockImage.new do |b| %>
+            <%= b.input :image, label: false %>
+        <% end %>
 
-    </div>
+        <%= f.add_nested_fields_link :block_images %>
 
+        <h3>Edit Block content</h3>
 
-    <h1>Edit Block content</h1>
-    <% if @block.blockable %>
-        <%= render @block.blockable_type.downcase, param_name: @block.blockable_type.downcase.to_sym, f: f, block: @block.blockable %>
-    <% else %>
-        <div data-type="post" class="form-part">
-          <%= render 'post', f: f, block: Post.new, param_name: :post %>
-        </div>
-        <div data-type="project" class="form-part">
-          <%= render 'project', f: f, block: Project.new, param_name: :project %>
-        </div>
+        <% if @block.blockable %>
+            <%= render @block.blockable_type.downcase, f: f, block: @block.blockable %>
+        <% else %>
+            <div data-type="post" class="form-part">
+              <%= render 'post', f: f, block: Post.new %>
+            </div>
+            <div data-type="project" class="form-part">
+              <%= render 'project', f: f, block: Project.new %>
+            </div>
+        <% end %>
+
+        <%= f.button :submit %>
+
     <% end %>
-
-    <%= f.submit 'Save', :class => 'btn btn-default' %>
-
-<% end %>
+  </div>
+</div>
 
 <% parent_layout "admin" %>

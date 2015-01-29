@@ -1,5 +1,15 @@
 <% @blocks.each do |b| %>
     <div class="box" data-type="<%= b.blockable_type.downcase %>" data-id="<%= b.blockable_id %>">
+
+
+      <div class="staticContent">
+        <% b.block_images.each do |i| %>
+                <%= image_tag i.image.url, :class => 'block-image' %>
+        <% end %>
+
+        <span class="glyphicon glyphicon-<%= glyphicon_for b.blockable_type %>"></span>
+      </div>
+
       <div class="innerContent">
         <span class="title"><%= b.title %></span>
 

@@ -1,0 +1,9 @@
+<div class="post">
+  <h1><%= @project.block.title %></h1>
+  <div class="post_data">
+    Written <%= @project.created_at %>
+  </div>
+  <div class="post_content">
+    <%= simple_format(@project.block.content) %>
+  </div>
+</div>
