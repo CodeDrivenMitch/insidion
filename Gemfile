@@ -35,3 +35,6 @@ gem 'simple_form'
 # gem 'bcrypt', '~> 3.1.7'
 
 gem 'devise'
+gem 'haml'
+gem 'datetimepicker-rails', github: 'zpaulovics/datetimepicker-rails', branch: 'master', submodules: true
+gem 'momentjs-rails'

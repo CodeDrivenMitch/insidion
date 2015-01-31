@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150129093636) do
+ActiveRecord::Schema.define(version: 20150129104218) do
 
   create_table "block_images", force: true do |t|
     t.integer  "block_id"
@@ -73,10 +73,20 @@ ActiveRecord::Schema.define(version: 20150129093636) do
     t.string   "unconfirmed_email"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "username"
+    t.string   "gender"
+    t.string   "function"
+    t.text     "biography"
+    t.date     "birthday"
+    t.string   "city"
+    t.string   "country"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
 end

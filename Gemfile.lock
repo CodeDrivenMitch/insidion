@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/zpaulovics/datetimepicker-rails.git
+  revision: 25aa12b54c7be0b526e68d9efef8818dc7e249b0
+  branch: master
+  submodules: true
+  specs:
+    datetimepicker-rails (3.1.1)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -55,6 +63,8 @@ GEM
       warden (~> 1.2.3)
     erubis (2.7.0)
     execjs (2.2.2)
+    haml (4.0.6)
+      tilt
     hike (1.2.3)
     i18n (0.7.0)
     jbuilder (2.2.6)
@@ -70,6 +80,8 @@ GEM
       mime-types (>= 1.16, < 3)
     mime-types (2.4.3)
     minitest (5.5.1)
+    momentjs-rails (2.9.0)
+      railties (>= 3.1)
     multi_json (1.10.1)
     mysql2 (0.3.17)
     nested_form_fields (0.6)
@@ -146,10 +158,13 @@ DEPENDENCIES
   autoprefixer-rails
   bootstrap-sass (~> 3.3.1)
   coffee-rails (~> 4.0.0)
+  datetimepicker-rails!
   devise
+  haml
   jbuilder (~> 2.0)
   jquery-rails
   jquery-ui-rails
+  momentjs-rails
   mysql2
   nested_form_fields
   paperclip (~> 4.2)
