@@ -1,5 +1,6 @@
 class Block < ActiveRecord::Base
   belongs_to :blockable, :polymorphic => true, :autosave=>true
+  belongs_to :user
   has_many :block_images
   validates_presence_of :blockable, :title, :active
 
@@ -11,6 +12,6 @@ class Block < ActiveRecord::Base
     Rails.logger.info blockable_attributes
     return unless self.blockable_type and not self.blockable_type.empty?
     self.blockable ||= blockable_type.constantize.new
-    blockable.assign_attributes(blockable_attributes)
+    blockable.assign_attributes(blockable_attributes) if blockable_attributes
   end
 end

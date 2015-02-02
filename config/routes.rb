@@ -15,5 +15,5 @@ Rails.application.routes.draw do
   #post routes
   resources :block
 
-  get '/admin' => 'admin#index', :as => :admin_index
+  get '/blocks_overview'                => 'admin#index',                   :as => :blocks_overview
 end

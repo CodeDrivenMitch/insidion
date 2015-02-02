@@ -1,4 +1,5 @@
 class BlockController < ApplicationController
+  layout 'front'
   before_action :get_block, :only => [:edit, :destroy, :update]
   before_action :check_login
 
@@ -33,6 +34,9 @@ class BlockController < ApplicationController
 
   def create
     @block = Block.new block_params
+    @block.blockable_attributes= params[:blockable_attributes]
+    @block.user = current_user
+    Rails.logger.info @block.to_yaml
     if @block.valid?
       @block.save
 
@@ -62,7 +66,7 @@ class BlockController < ApplicationController
 
   # STRONG PARAMETER FUNCTIONS
   def block_params
-    params.require(:block).permit(:title, :active, :blockable_type, block_images_attributes: [:image],
+    params.require(:block).permit(:title, :active,:content, :blockable_type, block_images_attributes: [:image],
     blockable_attributes: [
         :content,
         :excerpt

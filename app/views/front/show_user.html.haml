@@ -1,2 +1,12 @@
 %div.col-md-12.content
-  = @user.to_yaml
+  %div.row
+    %div.col-md-2
+      %img{src: 'http://placehold.it/200x300'}
+      %h2= @user.full_name
+      - if @user == current_user
+        %a{href: blocks_overview_path} Manage your blocks
+      - else
+        %p Nothing to see here.
+    %div.col-md-9.col-md-offset-1
+      %h2 Your blocks
+      = @user.blocks.to_yaml

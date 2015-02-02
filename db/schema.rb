@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150129104218) do
+ActiveRecord::Schema.define(version: 20150131132143) do
 
   create_table "block_images", force: true do |t|
     t.integer  "block_id"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20150129104218) do
     t.datetime "updated_at"
     t.boolean  "active"
     t.text     "content"
+    t.integer  "user_id"
   end
 
   create_table "pictures", force: true do |t|
